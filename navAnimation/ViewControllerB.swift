@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-class ViewControllerB : UIViewController {
+class ViewControllerB: UIViewController {
 
     override func loadView() {
         super.loadView()
@@ -21,7 +21,8 @@ class ViewControllerB : UIViewController {
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
-        navigationController?.navigationBar.barTintColor = .red
+        // tricky part in iOS 10
+        navigationController?.navigationBar.barTintColor = .red //previous color
         super.willMove(toParentViewController: parent)
     }
 
@@ -39,7 +40,7 @@ class ViewControllerB : UIViewController {
         }, completion: nil)
     }
 
-    private func setColors(){
+    private func setColors() {
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barTintColor = .blue
     }
