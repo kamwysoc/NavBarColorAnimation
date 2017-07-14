@@ -11,18 +11,14 @@ class ViewControllerA: UIViewController, UIViewControllerTransitioningDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        animateHeight()
+        self.transitionCoordinator?.animate(alongsideTransition: {
+            context in
+            self.navigationController?.navigationBar.applyHeight(44)
+        })
         super.viewWillAppear(animated)
     }
 
     func showController() {
         navigationController?.pushViewController(ViewControllerB(), animated: true)
-    }
-
-    private func animateHeight() {
-        self.transitionCoordinator?.animate(alongsideTransition: {
-            context in
-            self.navigationController?.navigationBar.applyHeight(44)
-        })
     }
 }

@@ -10,23 +10,22 @@ class ViewControllerB: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        animateHeight()
+        self.transitionCoordinator?.animate(alongsideTransition: {
+            context in
+            self.navigationController?.navigationBar.applyHeight(100)
+        })
         super.viewWillAppear(animated)
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
         if parent == nil {
-            navigationController?.navigationBar.applyHeight(44)
+            UIView.animate(withDuration: 0.1) {
+                self.navigationController?.navigationBar.applyHeight(44)
+            }
         }
         super.willMove(toParentViewController: parent)
     }
 
-    private func animateHeight() {
-        self.transitionCoordinator?.animate(alongsideTransition: {
-            context in
-            self.navigationController?.navigationBar.applyHeight(100)
-        })
-    }
 
 }
 
