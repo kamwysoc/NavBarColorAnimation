@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import CoreGraphics
+
 
 class ViewControllerB: UIViewController {
 
@@ -10,22 +12,16 @@ class ViewControllerB: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.transitionCoordinator?.animate(alongsideTransition: {
-            context in
-            self.navigationController?.navigationBar.applyHeight(100)
-        })
+        animateNavBar()
         super.viewWillAppear(animated)
     }
 
-    override func willMove(toParentViewController parent: UIViewController?) {
-        if parent == nil {
-            UIView.animate(withDuration: 0.1) {
-                self.navigationController?.navigationBar.applyHeight(44)
-            }
-        }
-        super.willMove(toParentViewController: parent)
+    private func animateNavBar() {
+        let navLayer = navigationController?.navigationBar.layer
+        self.transitionCoordinator?.animate(alongsideTransition: {
+            context in
+            navLayer!.anchorPoint = CGPoint(x: 0.5, y: -0.5)
+        })
     }
-
-
 }
 
