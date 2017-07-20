@@ -12,18 +12,9 @@ class ViewControllerA: UIViewController, UIViewControllerTransitioningDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animateNavBar()
     }
 
     func showController() {
         navigationController?.pushViewController(ViewControllerB(), animated: true)
-    }
-
-    private func animateNavBar() {
-        let navLayer = navigationController?.navigationBar.layer
-        self.transitionCoordinator?.animate(alongsideTransition: {
-            context in
-            navLayer!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        })
     }
 }

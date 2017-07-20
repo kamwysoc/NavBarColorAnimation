@@ -3,7 +3,7 @@ import UIKit
 import CoreGraphics
 
 
-class ViewControllerB: UIViewController {
+class ViewControllerB: UIViewController, UINavigationBarDelegate {
 
     override func loadView() {
         super.loadView()
@@ -12,16 +12,15 @@ class ViewControllerB: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        animateNavBar()
+        navigationController?.navigationBar.applyHeight(100)
         super.viewWillAppear(animated)
     }
 
-    private func animateNavBar() {
-        let navLayer = navigationController?.navigationBar.layer
-        self.transitionCoordinator?.animate(alongsideTransition: {
-            context in
-            navLayer!.anchorPoint = CGPoint(x: 0.5, y: -0.5)
-        })
+    override func willMove(toParentViewController parent: UIViewController?) {
+        if parent == nil { // here you know that back button was tapped
+            navigationController?.navigationBar.applyHeight(44)
+        }
+        super.willMove(toParentViewController: parent)
     }
 }
 
